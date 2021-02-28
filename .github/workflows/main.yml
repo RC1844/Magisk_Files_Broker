@@ -1,0 +1,63 @@
+name: Auto Magisk Files Provider
+on:
+  release:
+    types: [published]
+  push:
+    tags:
+      - "v*"
+  #  branches:
+  #    - master
+  schedule:
+    - cron: 0 */8 * * *
+  watch:
+    types: [started]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        # with:
+        #   persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+        #   fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+      - name: Download Json
+        run: |
+          wget https://raw.githubusercontent.com/topjohnwu/magisk_files/master/beta.json -O beta.json
+          wget https://raw.githubusercontent.com/topjohnwu/magisk_files/master/stable.json -O stable.json
+          wget https://raw.githubusercontent.com/topjohnwu/magisk_files/canary/canary.json -O canary.json
+
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "raw.githubusercontent.com"
+          replace: "raw.fastgit.org"
+          include: ".json"
+
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "github.com"
+          replace: "download.fastgit.org"
+          include: ".json"
+
+      - name: Commit files
+        run: |
+          {
+              git config user.name github-actions
+              git config user.email github-actions@github.com
+              git add .
+              git commit -m "$(date "+%Y-%m-%d %H:%M:%S")" -a
+              if [ $? -eq 0 ]; then
+                  date >>RunDate.txt
+                  git commit -m "$(date "+%Y-%m-%d %H:%M:%S")" -a
+                  git push
+              else
+                  echo No Update
+              fi
+          } || {
+              echo Execution Failed >RunDate.txt
+              exit 1
+          }

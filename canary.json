@@ -1,0 +1,22 @@
+{
+  "app": {
+    "version": "79ee85c0",
+    "versionCode": "22001",
+    "link": "app-debug.apk",
+    "note": "notes.md"
+  },
+  "magisk": {
+    "version": "79ee85c0",
+    "versionCode": "22001",
+    "link": "app-debug.apk",
+    "note": "notes.md",
+    "md5": "edcdbee86e3ab4ce71624f0fd5cd895a"
+  },
+  "uninstaller": {
+    "link": "magisk-uninstaller.zip"
+  },
+  "stub": {
+    "versionCode": "18",
+    "link": "stub-release.apk"
+  }
+}
