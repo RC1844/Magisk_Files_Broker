@@ -27,7 +27,7 @@ jobs:
         run: |
           wget https://raw.githubusercontent.com/topjohnwu/magisk_files/master/beta.json -O beta.json
           wget https://raw.githubusercontent.com/topjohnwu/magisk_files/master/stable.json -O stable.json
-          wget https://raw.githubusercontent.com/topjohnwu/magisk_files/master/canary.json -O canary.json
+          wget https://raw.githubusercontent.com/topjohnwu/magisk_files/canary/canary.json -O canary.json
 
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@master
