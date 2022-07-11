@@ -10,7 +10,7 @@
     "link": "https://cdn.jsdelivr.net/gh/topjohnwu/magisk-files@22.1/stub-release.apk"
   },
   "uninstaller": {
-    "link": "https://download.fastgit.org/topjohnwu/Magisk/releases/download/v21.4/Magisk-uninstaller-20210117.zip"
+    "link": "https://github.com/topjohnwu/Magisk/releases/download/v21.4/Magisk-uninstaller-20210117.zip"
   },
   "magisk": {
     "version": "22.1",
